@@ -1,0 +1,11 @@
+#  Copyright (c) 2022 Karoly Molnar
+#  SPDX-License-Identifier: Apache-2.0
+
+description: This binding gives single digit representation of the LCD controller
+
+compatible: "lcd-digit"
+
+properties:
+  digit:
+     type: phandles
+     required: true

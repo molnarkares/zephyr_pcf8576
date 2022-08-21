@@ -1,0 +1,194 @@
+&lcd_display {
+  seg_1a: s1  { segment = <3 1>; };
+  seg_1b: s2  { segment = <2 1>; };
+  seg_1c: s3  { segment = <1 1>; };
+  seg_1d: s4  { segment = <0 0>; };
+  seg_1e: s5  { segment = <1 0>; };
+  seg_1f: s6  { segment = <3 0>; };
+  seg_1g: s7  { segment = <2 0>; }; 
+  seg_1dp:s8  { segment = <0 1>; };
+  
+  seg_2a: s9  { segment = <3 3>; };
+  seg_2b: s10 { segment = <2 3>; };
+  seg_2c: s11 { segment = <1 3>; };
+  seg_2d: s12 { segment = <0 2>; };
+  seg_2e: s13 { segment = <1 2>; };
+  seg_2f: s14 { segment = <3 2>; };
+  seg_2g: s15 { segment = <2 2>; };
+  seg_2dp:s16 { segment = <0 3>; };
+ 
+  seg_3a: s17 { segment = <3 5>; };
+  seg_3b: s18 { segment = <2 5>; };
+  seg_3c: s19 { segment = <1 5>; };
+  seg_3d: s20 { segment = <0 4>; };
+  seg_3e: s21 { segment = <1 4>; };
+  seg_3f: s22 { segment = <3 4>; };
+  seg_3g: s23 { segment = <2 4>; };
+  seg_3dp:s24 { segment = <0 5>; };
+  
+  seg_4a: s25 { segment = <3 7>; };
+  seg_4b: s26 { segment = <2 7>; };
+  seg_4c: s27 { segment = <1 7>; };
+  seg_4d: s28 { segment = <0 6>; };
+  seg_4e: s29 { segment = <1 6>; };
+  seg_4f: s30 { segment = <3 6>; };
+  seg_4g: s31 { segment = <2 6>; };   
+    
+  seg_5a: s45{ segment = <0 23>; };
+  seg_5b: s46{ segment = <1 23>; };
+  seg_5c: s47{ segment = <2 23>; };
+  seg_5d: s48{ segment = <3 24>; };
+  seg_5e: s49{ segment = <2 24>; };
+  seg_5f: s50{ segment = <0 24>; };
+  seg_5g: s51{ segment = <1 24>; };
+  seg_5dp:s52{ segment = <3 23>; };
+  
+  seg_6a: s53 { segment = <0 21>; };
+  seg_6b: s54 { segment = <1 21>; };
+  seg_6c: s55 { segment = <2 21>; };
+  seg_6d: s56 { segment = <3 22>; };
+  seg_6e: s57 { segment = <2 22>; };
+  seg_6f: s58 { segment = <0 22>; };
+  seg_6g: s59 { segment = <1 22>; };
+  seg_6dp:s60 { segment = <3 21>; };
+  
+  seg_7a: s61 { segment = <0 19>; };
+  seg_7b: s62 { segment = <1 19>; };
+  seg_7c: s63 { segment = <2 19>; };
+  seg_7d: s64 { segment = <3 20>; };
+  seg_7e: s65 { segment = <2 20>; };
+  seg_7f: s66 { segment = <0 20>; };
+  seg_7g: s67 { segment = <1 20>; };
+  seg_7dp:s68 { segment = <3 19>; };
+  
+  seg_8a: s69 { segment = <0 15>; };
+  seg_8b: s70 { segment = <1 15>; };
+  seg_8c: s71 { segment = <2 15>; };
+  seg_8d: s72 { segment = <3 16>; };
+  seg_8e: s73 { segment = <2 16>; };
+  seg_8f: s74 { segment = <0 16>; };
+  seg_8g: s75 { segment = <1 16>; };
+  seg_8dp:s76 { segment = <3 15>; };
+  
+  seg_9a: s77 { segment = <0 13>; };
+  seg_9b: s78 { segment = <1 13>; };
+  seg_9c: s79 { segment = <2 13>; };
+  seg_9d: s80 { segment = <3 14>; };
+  seg_9e: s81 { segment = <2 14>; };
+  seg_9f: s82 { segment = <0 14>; };
+  seg_9g: s83 { segment = <1 14>; };
+  seg_9dp:s84 { segment = <3 13>; };
+  
+  seg_10a: s85  { segment = <0 11>; };
+  seg_10b: s86  { segment = <1 11>; };
+  seg_10c: s87  { segment = <2 11>; };
+  seg_10d: s88  { segment = <3 12>; };
+  seg_10e: s89  { segment = <2 12>; };
+  seg_10f: s90  { segment = <0 12>; };
+  seg_10g: s91  { segment = <1 12>; };
+
+  seg_col1: s32{ segment = <0 7>; };
+  seg_col2: s33{ segment = <0 8>; };
+  seg_col3: s34{ segment = <1 8>; };
+  
+  seg_t1: s35{ segment = <2 8>; };
+  
+  seg_w1: s36{ segment = <3 8>; };
+  seg_w2: s37{ segment = <3 9>; };
+  seg_w3: s38{ segment = <2 9>; };
+  seg_w4: s39{ segment = <1 9>; };
+  seg_w5: s40{ segment = <0 9>; };
+  
+  seg_l1: s41{ segment = <0 10>; };
+  seg_l2: s42{ segment = <1 10>; };
+  seg_l3: s43{ segment = <2 10>; };
+  seg_l4: s44{ segment = <3 10>; };
+
+  seg_s1: s92   { segment = <3 18>; };
+  seg_s2: s93   { segment = <2 18>; };
+  seg_s3: s94   { segment = <1 18>; };
+  seg_s4: s95   { segment = <0 18>; };
+  seg_s5: s96   { segment = <0 17>; };
+  seg_s6: s97   { segment = <1 17>; };
+  seg_s7: s98   { segment = <2 17>; };
+  seg_s8: s99   { segment = <3 17>; };
+  seg_s9: s100  { segment = <3 11>; };
+  
+  seg_dp_none: s999  { segment = <0 40>; }; //40 is out of the normal range 0..39
+  
+  sign_defs:    sig  { compatible = "lcd-sign"; 
+                        sign_repair:          sig1 { sign = <&seg_t1>;};
+                        sign_col_s:           sig2 { sign = <&seg_col1>;};
+                        sign_col_l1:          sig3 { sign = <&seg_col2>;};
+                        sign_col_l2:          sig4 { sign = <&seg_col3>;};
+                        sign_mv:              sig5 { sign = <&seg_s1>;};
+                        sign_nm:              sig6 { sign = <&seg_s2>;};
+                        sign_kg:              sig7 { sign = <&seg_s3>;};
+                        sign_g:               sig8 { sign = <&seg_s4>;};
+                        sign_mm:              sig9 { sign = <&seg_s5>;};
+                        sign_microepsilon:    sig10 { sign = <&seg_s6>;};
+                        sign_kpa:             sig11 { sign = <&seg_s7>;};
+                        sign_mpa:             sig12 { sign = <&seg_s8>;};
+                        sign_degc:            sig13 { sign = <&seg_s9>;};  
+                        };
+
+  bar_antenna:  bar1 { compatible = "lcd-bar"; 
+                        b1 { bar = <&seg_l1>;};
+                        b2 { bar = <&seg_l2>;};
+                        b3 { bar = <&seg_l3>;};
+                        b4 { bar = <&seg_l4>;};  
+                        };
+  bar_battery:  bar2 { compatible = "lcd-bar"; 
+                        b1 { bar = <&seg_w1>;};
+                        b2 { bar = <&seg_w5>;};
+                        b3 { bar = <&seg_w4>;};
+                        b4 { bar = <&seg_w3>;};
+                        b5 { bar = <&seg_w2>;};  
+                        };
+  
+  digit1:       d1   { compatible = "lcd-digit"; 
+                        digit = <&seg_1a &seg_1b &seg_1c &seg_1d &seg_1e &seg_1f &seg_1g &seg_1dp>;};
+
+  digit2:       d2   { compatible = "lcd-digit"; 
+                        digit = <&seg_2a &seg_2b &seg_2c &seg_2d &seg_2e &seg_2f &seg_2g &seg_2dp>;};
+
+  digit3:       d3   { compatible = "lcd-digit"; 
+                        digit = <&seg_3a &seg_3b &seg_3c &seg_3d &seg_3e &seg_3f &seg_3g &seg_3dp>;};
+
+  digit4:       d4   { compatible = "lcd-digit"; 
+                        digit = <&seg_4a &seg_4b &seg_4c &seg_4d &seg_4e &seg_4f &seg_4g &seg_dp_none>;};
+
+  digit5:       d5   { compatible = "lcd-digit"; 
+                        digit = <&seg_5a &seg_5b &seg_5c &seg_5d &seg_5e &seg_5f &seg_5g &seg_5dp>;};
+
+  digit6:       d6   { compatible = "lcd-digit"; 
+                        digit = <&seg_6a &seg_6b &seg_6c &seg_6d &seg_6e &seg_6f &seg_6g &seg_6dp>;};
+
+  digit7:       d7   { compatible = "lcd-digit"; 
+                        digit = <&seg_7a &seg_7b &seg_7c &seg_7d &seg_7e &seg_7f &seg_7g &seg_7dp>;};
+
+  digit8:       d8   { compatible = "lcd-digit"; 
+                        digit = <&seg_8a &seg_8b &seg_8c &seg_8d &seg_8e &seg_8f &seg_8g &seg_8dp>;};
+
+  digit9:       d9   { compatible = "lcd-digit"; 
+                        digit = <&seg_9a &seg_9b &seg_9c &seg_9d &seg_9e &seg_9f &seg_9g &seg_9dp>;};
+
+  digit10:      d10  { compatible = "lcd-digit"; 
+                        digit = <&seg_10a &seg_10b &seg_10c &seg_10d &seg_10e &seg_10f &seg_10g &seg_dp_none>;};
+
+  
+  num_small: num1 { compatible = "lcd-number"; 
+                        n1 {number = <&digit1>;};
+                        n2 {number = <&digit2>;};
+                        n3 {number = <&digit3>;};
+                        n4 {number = <&digit4>;};  
+                        };
+  num_large: num2 { compatible = "lcd-number"; 
+                        n1 {number = <&digit5>;};
+                        n2 {number = <&digit6>;};
+                        n3 {number = <&digit7>;};
+                        n4 {number = <&digit8>;};
+                        n5 {number = <&digit9>;};
+                        n6 {number = <&digit10>;};  
+                        };
+};

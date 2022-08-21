@@ -1,0 +1,13 @@
+#  Copyright (c) 2022 Karoly Molnar
+#  SPDX-License-Identifier: Apache-2.0
+
+description: This binding gives the indicator bar representation of the LCD controller
+
+compatible: "lcd-bar"
+
+child-binding:
+    description: LCD segment definitions for indicator bars
+    properties:
+        bar:
+           type: phandle
+           required: true

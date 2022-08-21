@@ -1,0 +1,35 @@
+#  Copyright (c) 2022 Karoly Molnar
+#  SPDX-License-Identifier: Apache-2.0
+
+description: This binding gives a base representation of the PCF8676 LCD controller
+
+compatible: "nxp,pcf8576"
+
+include: i2c-device.yaml
+properties:
+    backplane-mux:
+      type: int
+      required: false
+      description: LCD Drive Mode [1..4]
+      default: 4
+    sub-address:
+      type: int
+      required: false
+      description: Device sub-address A[0:2]
+      default: 0
+    powersave-mode:
+      type: boolean
+      required: false
+      description: Power saving mode enabled
+    lcd-bias:
+      type: string
+      required: false
+      description: LCD BIAS 1/3 or 1/2
+      enum:
+         - "1_3"
+         - "1_2"
+      default: "1_3"
+    lcd:
+      type: phandle
+      required: false
+      description: LCD display that is driven

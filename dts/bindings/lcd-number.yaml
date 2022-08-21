@@ -1,0 +1,13 @@
+#  Copyright (c) 2022 Karoly Molnar
+#  SPDX-License-Identifier: Apache-2.0
+
+description: This binding gives multiple-digit number representation of the LCD controller
+
+compatible: "lcd-number"
+
+child-binding:
+    description: LCD segment definitions for number digits
+    properties:
+        number:
+           type: phandle
+           required: true

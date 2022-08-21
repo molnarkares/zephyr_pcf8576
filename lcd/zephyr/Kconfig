@@ -1,0 +1,25 @@
+menuconfig LCD
+	bool "LCD drivers"
+	help
+	  Include LCD drivers in the system configuration.
+
+if LCD
+
+module = LCD
+module-str = lcd
+source "subsys/logging/Kconfig.template.log_config"
+
+config LCD_INIT_PRIORITY
+	int "LCD initialization priority"
+	default 90
+	help
+	  System initialization priority for LCD drivers.
+
+
+config PCF8576
+	bool "PCF8576 LCD driver"
+	depends on (I2C)
+	help
+	  Enable LED driver for PCF8576.
+
+endif # LCD

@@ -1,0 +1,16 @@
+#  Copyright (c) 2022 Karoly Molnar
+#  SPDX-License-Identifier: Apache-2.0
+
+description: This binding gives a base representation of the PCF8676 LCD controller
+
+compatible: "lcd-lowsegment"
+
+child-binding:
+    description: LCD segment definitions for segments
+    properties:
+        segment:
+           type: array
+           required: false
+        bar_signs:
+           type: array
+           required: false

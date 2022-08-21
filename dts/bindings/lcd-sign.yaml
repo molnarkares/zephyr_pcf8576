@@ -1,0 +1,14 @@
+#  Copyright (c) 2022 Karoly Molnar
+#  SPDX-License-Identifier: Apache-2.0
+
+description: This binding gives the individual sign representation of the LCD controller
+
+compatible: "lcd-sign"
+
+child-binding:
+    description: LCD segment definitions for signs
+    properties:
+        sign:
+           type: phandle
+           required: false
+        
