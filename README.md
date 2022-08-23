@@ -194,7 +194,7 @@ ON, if _value_ is true and OFF if _value_ is false.
 
 # Demo application
 
-There is a demo application included in src/main folder. It is tailored to a
+There is a demo application included in src folder. It is tailored to a
 given LCD layout that is depicted above. It implements an up and a down counter display, 
 that are accessed via their symbolic name _num_large_ and num_small_ respectively.
 
