@@ -162,12 +162,12 @@ get the required RAM buffers allocated and init state set.
 ### Definition of bar graphs
 
 This shall be done via the pair of pcf8576_bar_declare(_label_) and 
-pcf8576_bar_define(_label) macros, where _label_ uis the bar symbol name.
+pcf8576_bar_define(_label) macros, where _label_ is the bar symbol name.
 
 ### Definition of numbers
 
 This shall be done via the pair of pcf8576_num_declare(_label_) and
-pcf8576_num_define(_label) macros, where _label_ uis the number symbol name.
+pcf8576_num_define(_label) macros, where _label_ is the number symbol name.
 
 ## pcf8576_flush(void) (function)
 
