@@ -147,12 +147,27 @@ identify the API an initialization.
 ## Getting the device control structure
 
 The device struct can be acquired via the DEVICE_DT_GET api.
-Ezample:
+Example:
 
 `const struct device *dev = DEVICE_DT_GET(DT_NODELABEL(lcd_drv));`
 
 where lcd_drv is the name of the device in the application overlay file under 
 the I2C peripheral definition part.
+
+## Symbol definition in the application 
+
+Complex multi-segment symbols shall be _declared_ and _defined_ in the application in order to 
+get the required RAM buffers allocated and init state set.
+
+### Definition of bar graphs
+
+This shall be done via the pair of pcf8576_bar_declare(_label_) and 
+pcf8576_bar_define(_label) macros, where _label_ uis the bar symbol name.
+
+### Definition of numbers
+
+This shall be done via the pair of pcf8576_num_declare(_label_) and
+pcf8576_num_define(_label) macros, where _label_ uis the number symbol name.
 
 ## pcf8576_flush(void) (function)
 
