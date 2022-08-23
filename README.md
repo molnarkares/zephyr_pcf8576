@@ -177,3 +177,12 @@ and the rest to OFF.
 The _pcf8576_sign_ API call can set the sign referred with the _label_ to 
 ON, if _value_ is true and OFF if _value_ is false.
 
+# Demo application
+
+There is a demo application included in src/main folder. It is tailored to a
+given LCD layout that is depicted above. It implements an up and a down counter display, 
+that are accessed via their symbolic name _num_large_ and num_small_ respectively.
+
+The video below shows the expected operation of the LCD:
+
+![demo-gif](./images/zephyr_lcd_demo.gif)
