@@ -48,12 +48,12 @@ void main(void) {
     LOG_INF("PCF8576 device is ready\n");
   }
 
-  double countlarge = 1.1;
+  double countlarge = -12345.9;
   int counsmall = 999;
   while (1) {
     pcf8576_num(dev, num_large, countlarge);
     pcf8576_num(dev, num_small, (double)counsmall--);
-//    countlarge = countlarge - 1000.0;
+    //countlarge = countlarge - 10.0;
     pcf8576_flush(dev);
     k_msleep(100);
 //    countlarge += 0.1;
