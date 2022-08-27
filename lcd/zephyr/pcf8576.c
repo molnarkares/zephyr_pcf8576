@@ -64,9 +64,10 @@ static const float _pcf8576_p10[] = {1., 1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8,
 
 static void _pcf8576_set(const struct device *dev, const uint8_t data[2]);
 static void _pcf8576_clear(const struct device *dev, const uint8_t data[2]);
-static size_t _pcf8576_count_int_digits(int32_t number);
-static size_t _pcf8576_count_frac_digits(float val, size_t max_d, int32_t *fr);
-static void _pcf8576_int_to_digits(int32_t val, uint8_t digits[], size_t no_digits);
+static size_t _pcf8576_count_int_digits(uint32_t number);
+static size_t _pcf8576_count_frac_digits(float val, size_t max_d, uint32_t *fr);
+static void _pcf8576_int_to_digits(uint32_t val, uint8_t digits[], size_t no_digits,
+                                   uint8_t space_digit,bool sign);
 
 void _pcf8576_set_digit(const struct device *dev, const uint8_t segment[][2],
                         uint8_t value) {
@@ -152,14 +153,12 @@ static int pcf8576_initialize(const struct device *dev) {
   return 0;
 }
 
-static void _pcf8576_int_to_digits(int32_t val, uint8_t digits[], size_t no_digits) {
-  uint8_t sign;
-  if(val < 0) {
-    sign = DIGIT_NEG;
-    val *= -1;
-  }else {
-    sign = DIGIT_BLANK;
-  }
+static void _pcf8576_int_to_digits(uint32_t val,
+                                   uint8_t digits[],
+                                   size_t no_digits,
+                                   uint8_t space_digit,
+                                   bool sign) {
+  uint8_t sign_ch = sign ? DIGIT_NEG : space_digit;
   int idx;
   for(idx = no_digits-1; idx >= 0; idx--) {
     digits[idx] = val%10;
@@ -169,9 +168,9 @@ static void _pcf8576_int_to_digits(int32_t val, uint8_t digits[], size_t no_digi
     }
   }
   if(--idx >=0) {
-    digits[idx--] = sign;
+    digits[idx--] = sign_ch;
     for(; idx >= 0; idx--) {
-      digits[idx] = DIGIT_BLANK;
+      digits[idx] = space_digit;
     }
   }
 }
@@ -184,21 +183,23 @@ void _pcf8576_num_ovf(uint8_t digits[], size_t no_digits) {
 
 void _pcf8576_float_to_digits(float val, uint8_t digits[], size_t no_digits){
 
-  int32_t intpart = (int32_t)val;
+  bool sign = val < 0;
+  uint32_t intpart = sign ? (uint32_t)(val*-1) : (uint32_t)val;
   size_t int_digits = _pcf8576_count_int_digits(intpart);
+  int_digits += sign ? 1 : 0;
 
   if(int_digits > no_digits) {
     _pcf8576_num_ovf(digits, no_digits);
   }else {
-    int32_t fracpart;
+    uint32_t fracpart;
     size_t frac_digits = _pcf8576_count_frac_digits(val,no_digits-int_digits, &fracpart);
     if((frac_digits > 0) && (int_digits < no_digits)) {
       size_t dp_pos = no_digits - frac_digits;
-      _pcf8576_int_to_digits(intpart, digits, dp_pos);
-      _pcf8576_int_to_digits(fracpart, &digits[dp_pos], frac_digits);
+      _pcf8576_int_to_digits(intpart, digits, dp_pos, DIGIT_BLANK,sign);
+      _pcf8576_int_to_digits(fracpart, &digits[dp_pos], frac_digits,0, false);
       digits[dp_pos-1] += DIGIT_DP;
     }else {
-      _pcf8576_int_to_digits(intpart, digits, no_digits);
+      _pcf8576_int_to_digits(intpart, digits, no_digits,DIGIT_BLANK,sign);
     }
   }
 }
@@ -211,15 +212,8 @@ static void _pcf8576_clear(const struct device *dev, const uint8_t data[2]) {
   ((struct pcf8576_data *)dev->data)->display_ram[data[1]] &= ~data[0];
 }
 
-static size_t _pcf8576_count_int_digits(int32_t number) {
-  size_t cnt;
-  if(number < 0) {
-    number *= -1;
-    cnt = 1;  // +1 position for the '-' sign
-  }else {
-    cnt = 0;
-  }
-  cnt +=  (number >= 1000000000) ? 10
+static size_t _pcf8576_count_int_digits(uint32_t number) {
+  size_t cnt =  (number >= 1000000000) ? 10
         : (number >= 100000000) ? 9
         : (number >= 10000000) ? 8
         : (number >= 1000000) ? 7
@@ -232,17 +226,17 @@ static size_t _pcf8576_count_int_digits(int32_t number) {
   return cnt;
 }
 
-static size_t _pcf8576_count_frac_digits(float val, size_t max_d, int32_t *fr) {
-  float fr_float = (val - (int32_t)val);
+static size_t _pcf8576_count_frac_digits(float val, size_t max_d, uint32_t *fr) {
+  if(val < 0) {
+    val *= -1.0;
+  }
+  float fr_float = (val - (uint32_t)val);
   size_t ret = max_d;
-  int32_t fracpart = (int32_t)(fr_float * _pcf8576_p10[max_d]);
+  uint32_t fracpart = (uint32_t)(fr_float * _pcf8576_p10[max_d]+0.5);
   if(fracpart != 0) {
     while(fracpart % 10 == 0 && ret) {
       fracpart/=10;
       ret--;
-    }
-    if(fracpart < 0) {
-      fracpart *= 1;
     }
   }else {
     ret = 0;

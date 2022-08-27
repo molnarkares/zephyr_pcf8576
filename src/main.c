@@ -48,7 +48,7 @@ void main(void) {
     LOG_INF("PCF8576 device is ready\n");
   }
 
-  double countlarge = -12345.9;
+  double countlarge = 0.09;
   int counsmall = 999;
   while (1) {
     pcf8576_num(dev, num_large, countlarge);
@@ -168,38 +168,46 @@ ZTEST(lcd_tests, test_large_num_float_pos)
   pcf8576_num(dev, num_large, countlarge);
   uint8_t ref[] = {30,30,30,30,21,2};
   zassert_mem_equal(digitarray_num_large, ref, 6,"Mismatch in LCD memory");
-//
-//
-//  countlarge = 1984;
-//  pcf8576_num(dev, num_large, countlarge);
-//  ref[0] = 30;
-//  ref[1] = 30;
-//  ref[2] = 1;
-//  ref[3] = 9;
-//  ref[4] = 8;
-//  ref[5] = 4;
-//  zassert_mem_equal(digitarray_num_large, ref, 6,"Mismatch in LCD memory");
-//
-//  countlarge = 123456;
-//  pcf8576_num(dev, num_large, countlarge);
-//  ref[0] = 1;
-//  ref[1] = 2;
-//  ref[2] = 3;
-//  ref[3] = 4;
-//  ref[4] = 5;
-//  ref[5] = 6;
-//  zassert_mem_equal(digitarray_num_large, ref, 6, "Mismatch in LCD memory");
-//
-//  countlarge = 0;
-//  pcf8576_num(dev, num_large, countlarge);
-//  ref[0] = 30;
-//  ref[1] = 30;
-//  ref[2] = 30;
-//  ref[3] = 30;
-//  ref[4] = 30;
-//  ref[5] = 0;
-//
-//  zassert_mem_equal(digitarray_num_large, ref, 6, "Mismatch in LCD values");
+
+  countlarge = 1984.1;
+  pcf8576_num(dev, num_large, countlarge);
+  ref[0] = 30;
+  ref[1] = 1;
+  ref[2] = 9;
+  ref[3] = 8;
+  ref[4] = 24;
+  ref[5] = 1;
+  zassert_mem_equal(digitarray_num_large, ref, 6,"Mismatch in LCD memory");
+
+  countlarge = 0.1;
+  pcf8576_num(dev, num_large, countlarge);
+  ref[0] = 30;
+  ref[1] = 30;
+  ref[2] = 30;
+  ref[3] = 30;
+  ref[4] = 20;
+  ref[5] = 1;
+  zassert_mem_equal(digitarray_num_large, ref, 6,"Mismatch in LCD memory");
+
+  countlarge = -0.1;
+  pcf8576_num(dev, num_large, countlarge);
+  ref[0] = 30;
+  ref[1] = 30;
+  ref[2] = 30;
+  ref[3] = 10;
+  ref[4] = 20;
+  ref[5] = 1;
+  zassert_mem_equal(digitarray_num_large, ref, 6,"Mismatch in LCD memory");
+
+  countlarge = -0.002;
+  pcf8576_num(dev, num_large, countlarge);
+  ref[0] = 30;
+  ref[1] = 10;
+  ref[2] = 20;
+  ref[3] = 0;
+  ref[4] = 0;
+  ref[5] = 2;
+  zassert_mem_equal(digitarray_num_large, ref, 6,"Mismatch in LCD memory");
 
 }
 
@@ -216,6 +224,10 @@ ZTEST(lcd_tests, test_large_num_ovf)
 
   countlarge = -123456;
   pcf8576_num(dev, num_large, countlarge);
+
+  countlarge = -123456.8;
+  pcf8576_num(dev, num_large, countlarge);
+
 
 }
 
