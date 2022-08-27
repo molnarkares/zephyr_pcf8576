@@ -81,11 +81,36 @@ typedef uint8_t nums_t[8][2];
        DT_PROP_BY_IDX(DT_PHANDLE_BY_IDX(DT_PHANDLE(item, number), digit, 7),   \
                       segment, 1))},
 
+#define pcf8576_num_declare(label) extern const nums_t numarray_##label[];
+
+#if (CONFIG_ZTEST == 1)
+#define pcf8576_num_define(label)                                              \
+  const nums_t numarray_##label[] = {                                          \
+      DT_FOREACH_CHILD(DT_NODELABEL(label), _NUMBERS_CFG)};                    \
+      uint8_t digitarray_##label[sizeof(numarray_##label) / sizeof(nums_t)];
+
+#define pcf8576_num(dev, label, value)                                         \
+  do {                                                                         \
+    _pcf8576_float_to_digits(value, digitarray_##label, sizeof(digitarray_##label));           \
+    for (size_t num_idx = 0; num_idx < sizeof(digitarray_##label); num_idx++) {        \
+      _pcf8576_set_digit(dev, numarray_##label[num_idx], digitarray_##label[num_idx]); \
+    }                                                                          \
+  } while (0)
+#else
 #define pcf8576_num_define(label)                                              \
   const nums_t numarray_##label[] = {                                          \
       DT_FOREACH_CHILD(DT_NODELABEL(label), _NUMBERS_CFG)};
 
-#define pcf8576_num_declare(label) extern const nums_t numarray_##label[];
+#define pcf8576_num(dev, label, value)                                         \
+  do {                                                                         \
+    uint8_t digitarray[sizeof(numarray_##label) / sizeof(nums_t)];             \
+    _pcf8576_float_to_digits(value, digitarray, sizeof(digitarray));           \
+    for (size_t num_idx = 0; num_idx < sizeof(digitarray); num_idx++) {        \
+      _pcf8576_set_digit(dev, numarray_##label[num_idx], digitarray[num_idx]); \
+    }                                                                          \
+  } while (0)
+
+#endif
 
 #define pcf8576_bar(dev, label, value)                                         \
   do {                                                                         \
@@ -98,22 +123,11 @@ typedef uint8_t nums_t[8][2];
     } while (idx > 0);                                                         \
   } while (0)
 
-#define pcf8576_num(dev, label, value)                                         \
-  do {                                                                         \
-    uint8_t digitarray[sizeof(numarray_##label) / sizeof(nums_t)];             \
-    _pcf8576_float_to_digits(value, digitarray, sizeof(digitarray));           \
-    for (size_t num_idx = 0; num_idx < sizeof(digitarray); num_idx++) {        \
-      _pcf8576_set_digit(dev, numarray_##label[num_idx], digitarray[num_idx]); \
-    }                                                                          \
-  } while (0)
-
 void pcf8576_flush(const struct device *dev);
 
 /* internal functions used by the lcd macros. Do not call them directly */
 void _pcf8576_set_digit(const struct device *dev, const uint8_t segment[][2],
                         uint8_t value);
 void _pcf8576_float_to_digits(double val, uint8_t digits[], size_t no_digits);
-void _pcf8576_set(const struct device *dev, const uint8_t data[2]);
-void _pcf8576_clear(const struct device *dev, const uint8_t data[2]);
 
 #endif /* ZEPHYR_INCLUDE_DISPLAY_PCF8576_H_ */

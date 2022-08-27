@@ -1,0 +1,5 @@
+tests:
+  # section.subsection
+  testing.ztest:
+    build_only: false
+    tags: testing
