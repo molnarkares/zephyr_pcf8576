@@ -48,15 +48,14 @@ void main(void) {
     LOG_INF("PCF8576 device is ready\n");
   }
 
-  double countlarge = 0.09;
+  double countlarge = -3.09;
   int counsmall = 999;
   while (1) {
     pcf8576_num(dev, num_large, countlarge);
     pcf8576_num(dev, num_small, (double)counsmall--);
-    //countlarge = countlarge - 10.0;
+    countlarge = countlarge + 1.07;
     pcf8576_flush(dev);
     k_msleep(100);
-//    countlarge += 0.1;
   }
 }
 #else
@@ -227,7 +226,6 @@ ZTEST(lcd_tests, test_large_num_ovf)
 
   countlarge = -123456.8;
   pcf8576_num(dev, num_large, countlarge);
-
 
 }
 

@@ -176,9 +176,9 @@ the driver to the internal RAM of the PCF8576 device. This is needed to
 refresh the LCD content after it has been changed by APIs that have manipulated 
 the segment values.
 
-## pcf8576_num(struct device *dev, _label_, double value) (macro) 
+## pcf8576_num(struct device *dev, _label_, float value) (macro) 
 
-The _pcf8576_num_ API call can convert the double floating point _value_ parameter
+The _pcf8576_num_ API call can convert the floating point _value_ parameter
 to the format matching the 7-segment number definition and set the symbol identified by the _label_ to 
 this value.
 
