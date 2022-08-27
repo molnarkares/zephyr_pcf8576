@@ -63,7 +63,7 @@ static const uint8_t segment_data[11] = {
 static void _pcf8576_set(const struct device *dev, const uint8_t data[2]);
 static void _pcf8576_clear(const struct device *dev, const uint8_t data[2]);
 static size_t _pcf8576_count_int_digits(int32_t number);
-static size_t _pcf8576_count_frac_digits(double number, size_t max_digits, uint32_t *fr_part);
+static size_t _pcf8576_count_frac_digits(float number, size_t max_digits, uint32_t *fr_part);
 
 static void _pcf8576_int_to_digits(int32_t val, uint8_t digits[], size_t no_digits);
 
@@ -181,22 +181,22 @@ void _pcf8576_num_ovf(uint8_t digits[], size_t no_digits) {
   }
 }
 
-void _pcf8576_float_to_digits(double val, uint8_t digits[], size_t no_digits){
+void _pcf8576_float_to_digits(float val, uint8_t digits[], size_t no_digits){
 
   int32_t intpart = (int32_t)val;
   bool is_negative = intpart < 0;
 
-  size_t int_digits = _pcf8576_count_digits(intpart);
+  size_t int_digits = _pcf8576_count_int_digits(intpart);
 
   if(int_digits > no_digits) {
     _pcf8576_num_ovf(digits, no_digits);
   }else {
-    double fr_double = (val - (double)intpart);
-//    int32_t fracpart = (int32_t)((val - (double)intpart)+0.5);
-    int32_t fracpart = (int32_t)(fr_double+0.5);
+    float fr_float = (val - (float)intpart);
+//    int32_t fracpart = (int32_t)((val - (float)intpart)+0.5);
+    int32_t fracpart = (int32_t)(fr_float+0.5);
     if((fracpart > 0) && (int_digits < no_digits)) {
       fracpart = is_negative ? fracpart * -1 : fracpart;
-      size_t frac_digits = _pcf8576_count_digits(fracpart);
+      size_t frac_digits = _pcf8576_count_int_digits(fracpart);
       frac_digits = (int_digits+frac_digits) > no_digits ? \
           no_digits - int_digits : frac_digits;
       size_t dp_pos = no_digits - int_digits;
@@ -237,9 +237,9 @@ static size_t _pcf8576_count_int_digits(int32_t number) {
         : 1;
   return cnt;
 }
-static size_t _pcf8576_count_frac_digits(double number, size_t max_digits, uint32_t *fr_part) {
-  number -= (int32_t)number;
-}
+//static size_t _pcf8576_count_frac_digits(float number, size_t max_digits, uint32_t *fr_part) {
+//  number -= (int32_t)number;
+//}
 
 static const struct lcd_driver_api pcf8576_lcds_api = {.flush = pcf8576_flush};
 

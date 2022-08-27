@@ -128,6 +128,6 @@ void pcf8576_flush(const struct device *dev);
 /* internal functions used by the lcd macros. Do not call them directly */
 void _pcf8576_set_digit(const struct device *dev, const uint8_t segment[][2],
                         uint8_t value);
-void _pcf8576_float_to_digits(double val, uint8_t digits[], size_t no_digits);
+void _pcf8576_float_to_digits(float val, uint8_t digits[], size_t no_digits);
 
 #endif /* ZEPHYR_INCLUDE_DISPLAY_PCF8576_H_ */
