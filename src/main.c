@@ -5,7 +5,7 @@
 
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/sys/printk.h>
-#include <zephyr/zephyr.h>
+#include <zephyr/kernel.h>
 
 #include <pcf8576.h>
 #include <zephyr/device.h>
